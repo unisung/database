@@ -1,0 +1,32 @@
+--
+select salary from employee where ename='SCOTT';
+select ename, salary from employee where salary >3000;
+select * from employee order by salary;
+
+--sub-query:다른쿼리안에 속한 쿼리문
+select ename, salary 
+  from employee 
+ where salary >(select salary -- 한(행)건 추출
+                  from employee 
+                 where ename='SCOTT');
+
+select dname
+  from department
+ where dno=(select dno --한(행)건 추출
+              from employee 
+             where ename='SCOTT');--조회조건 먼저 실행되어 조회값 추출
+ 
+select dno from employee where ename='SCOTT'; 
+
+--sub-query:다중행 서브쿼리
+--ORA-01427: single-row subquery returns more than one row
+select eno,ename,dno
+  from employee
+ where dno in (select dno from department where dno <>10);
+ 
+select dno from department where dno <>10;
+
+
+ 
+
+
