@@ -185,6 +185,57 @@ commit
 
 select nvl(max(seq),0)+1 from sale;
 
+--commit;-insert,update,delete같은 일련의 작업 내용을 DB에 영구 저장명령어
+--rollback; 
+--insert,update,delete 같은 일련의 작업내용을 이전 commit상태로 모두 되돌리는 명령어
+
+commit
+select * from bucket;--select는 트랜잭션작업이 아님.
+select * from stock;
+insert into bucket values('apple',5);--입력작업
+insert into stock values('bababa',10);--입력작업
+commit--db에 저장
+select * from bucket;--select는 트랜잭션작업이 아님
+select * from stock;--select는 트랜잭션작업이 아님
+commit -- db에 저장된 시점
+update bucket set qty=3 where item='apple';
+update stock  
+   set qty=qty-(select qty from bucket where item='apple')
+ where item='apple';
+select * from bucket;
+select * from stock;
+rollback -- 이전상태(바로앞의 commit 상태로 되돌리기)
+select * from bucket;
+select * from stock;
+
+select * from bucket;
+select * from sale;
+delete bucket;
+commit
+select count(*) from stock where item='mango';
+
+--savepoint :트랜잭션작업 기간을 세분화해서 처리
+drop table dept;--commit명령어 없이 바로 db에 반영
+create table dept as select * from department;--commit명령어 없이 바로 db에 반영
+select * from dept;
+delete from dept where dno=40;
+commit--db반영
+select * from dept;
+delete from dept where dno=30;
+savepoint s1;--savepoint지정 savepoint 세이브포인트명
+delete from dept where dno=20;
+select * from dept;
+savepoint s2;--savepoint 세이브포인트명
+delete from dept where dno=10;
+select * from dept;
+rollback to s2;--commit한 지점으로 데이타 되돌림.
+select * from dept;
+rollback to s1;--save point s1까지 되돌리기
+select * from dept;
+rollback; --전체 되돌리기
+select * from dept;
+
+
 
 
 

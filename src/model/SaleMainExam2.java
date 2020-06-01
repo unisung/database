@@ -4,32 +4,20 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Scanner;
 
-public class SaleMainExam {
+public class SaleMainExam2 {
 	 static Dao dao=Dao.getInstance();
 	 static Connection con=dao.getConnection();
-	 static Scanner scanner = new Scanner(System.in);
-//java프로그램은 db연동시 commit이 자동으로 설정되어있음.
-//java프로그램은 autocommit모드(autocommit=true)	 
+	 
 public static void main(String[] args) throws SQLException {
-	  //commit모드를 수동처리
-	  con.setAutoCommit(false);//commit수동처리
+	  con.setAutoCommit(false);
 		//재고등록
 		insertStock();
 		//장바구니등록
 		bucketProc();
 		//구매
 		saleProc();
-	   //트랜잭션 db에 저장/되돌리기	
-	  System.out.println("구매확정하시겠습니까?");
-	  String yesNo=scanner.next();
-	  if("yes".equals(yesNo))
-		  con.commit(); //db에 영구저장 메소드 commit();
-	  else if("no".equals(yesNo))
-		  con.rollback();//이전상태로 되돌리기 메소드 rollback();
-	  /// commit모드 자동으로 되돌리기
-	  con.setAutoCommit(true); //commit자동처리
+	  con.rollback();
 	}
 private static void saleProc() {
 try {
@@ -57,13 +45,12 @@ private static void bucketProc() {
 private static void insertStock() {
 	//상품명,수량	
 	  try {
-	Statement stmt=con.createStatement();
-	//'mango' 재고있는지 여부 확인
-	 ResultSet rs=stmt.executeQuery("select count(*) from stock where item='mango'");
-if(rs.next()) {
-	if(rs.getInt(1)>0)
-  stmt.executeUpdate("update stock set qty=10 where item='mango'");
-	else
-   stmt.executeUpdate("insert into stock values('mango',10)");		
- }	
-	} catch (SQLException e) {		e.printStackTrace();	} } }
+		Statement stmt=con.createStatement();
+		ResultSet rs=stmt.executeQuery("select count(*) from stock where item='mango'");
+		if(rs.next()) {
+			if(rs.getInt(1)>0)
+			stmt.executeUpdate("update stock set qty=10 where item='mango'");
+			else
+			stmt.executeUpdate("insert into stock values('mango',10)");
+		}
+		} catch (SQLException e) {		e.printStackTrace();	} } }
