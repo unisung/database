@@ -230,7 +230,11 @@ SQL> select count(*) from hr_syn_emp;
   COUNT(*)
 ----------
         14
-
+--
+select * from dba_synonyms where owner='USERTEST01';
+-- 시노님 삭제
+-- drop synonym 시노님명;
+SQL> drop synonym syn_hr_emp;
 
 
 
