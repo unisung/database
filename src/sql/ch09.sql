@@ -236,6 +236,36 @@ rollback; --전체 되돌리기
 select * from dept;
 
 
+-- commit /rollbakc / savepoint
+select * from dept;
+delete from dept where dno=40;
+select * from dept;
+rollback
+select * from dept;
+commit
+-- savepoint
+alter table emp_copy disable constraint emp_copy_dno_fk;
+alter table emp_sample disable constraint my_emp_dept_fk;
+delete from dept where dno=40;
+savepoint s1;
+delete from dept where dno=30;
+select * from dept;
+savepoint s2;
+delete from dept where dno=20;
+select * from dept;
+rollback to s1
+select * from dept;
+select * from user_constraints;
+
+create table test_save(
+dno number primary key,
+dname varchar2(20),
+loc varchar2(20)
+);
+select * from test_save;
+insert into test_save select * from department;
+commit
+select * from test_save;
 
 
 
