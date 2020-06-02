@@ -126,6 +126,23 @@ select * from v_emp_job_readonly;
 insert into v_emp_job_readonly values(9001,'일지매',20,'MANAGER');
 
 
+--view 생성
+create or replace view v_emp2
+as
+select eno,ename,job,manager,dno from employee;
+
+--실행
+select * from v_emp2;
+
+--복합뷰
+create or replace view v_emp_dname
+as
+select eno,ename,job,dname 
+  from employee natural join dept;
+  
+ select * from v_emp_dname order by eno; 
+ 
+ 
 
 
 
