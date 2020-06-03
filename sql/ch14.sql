@@ -221,6 +221,64 @@ begin--실행부
 end; 
 
 
+--cursor 커서명 is select문;
+--여러행의 데이타를  한번에 처리하는 객체
+declare--선언부
+v_dept department%rowtype;--참조타입 dno,dname,loc값을 저장
+v_cnt number;
+--cursor 변수 is 쿼리문;
+cursor c1 is select * from department;--커서 생성
+begin--실행부
+	dbms_output.put_line('부서번호       부서명         지역명');
+	dbms_output.put_line('-----------------------');
+	open c1;--커서 오픈
+	IF NOT c1%isopen then--오픈이면 true,아니면 false
+	open c1;
+	dbms_output.put_line('c1 열기');
+	ELSE
+	dbms_output.put_line('c1 오픈됨');
+	END IF;
+	loop
+	 dbms_output.put_line('실행된 건수:'||c1%rowcount);--rowcount실행건수
+	 fetch c1 into v_dept.dno, v_dept.dname, v_dept.loc;
+	 exit when c1%notfound;--반복문 빠져나가는 조건
+	 dbms_output.put_line(v_dept.dno||' '||v_dept.dname||' '||v_dept.loc);
+	 IF c1%FOUND THEN --레코드 조회되는지 여부 조회되면 true,아니면 false
+           dbms_output.put_line('레코드 있음');
+     END IF;
+	end loop;
+	close c1;--커서 닫기
+end;
+
+
+select * from department;
+-- open문, fetch문 생량-> for loop문으로 처리
+declare--선언부
+v_dept department%rowtype;
+cursor c1
+is 
+select * from department order by dno;
+begin--실행부
+	dbms_output.put_line('부서번호 부서명        지역명');
+	dbms_output.put_line('--------------------');
+	--open c1;
+  for v_dept in c1 loop--커서 c1 자동 오픈, fetch자동 실행
+   exit when c1%notfound;
+   dbms_output.put_line(v_dept.dno||' '||v_dept.dname||' '||v_dept.loc);
+  end loop;
+end; 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
