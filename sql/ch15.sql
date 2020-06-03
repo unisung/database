@@ -116,6 +116,8 @@ select ename,fn_salary_ename(ename) salary
   from employee order by eno;
 
 -- 특정 사원의 입사일자를 구하는 함수 
+--create or replace function 함수명(매개변수 타입)return 리턴타입 
+-- as begin~~  return 결과; end
 create or replace function fn_hire_eno
 (v_eno number)
 return date
@@ -138,9 +140,76 @@ print v_hiredae;
 --쿼리문에서 결과 출력
 select eno, fn_hire_eno(eno) from employee where eno=7788;
 
+create or replace function fn_hire_eno
+(v_eno number) --매개변수 선언
+return varchar2--결과처리 리턴타입 지정 선언
+as
+v_date date;
+begin
+	select hiredate
+	  into v_date 
+	  from employee
+	 where eno=v_eno;
+   return to_char(v_date);	 --결과 리턴 문;
+end;
+
+
+--트리거
+--테이블의 데이타에 트랜잭션발생시 자동 처리해주는 객체 trigger
+create or replace trigger trigger_sample1--트리거명
+after insert--입력직후 자동 실행되는 트리거
+on dept--등록될 테이블
+for each row--행단위 실행
+begin
+	if inserting then--updating,deleting
+	 dbms_output.put_line('insertt Trigger 발생');
+	 insert into dept_history
+	 values(:new.dno,:new.dname,:new.loc,sysdate);--:new.칼럼,:old.칼럼
+	 -- 입력전 :new.dno의 값은 null, :old.dno의 값 null
+	 -- 입력후 :new.dno의 값은 입력값, :old.dno의 값 null,
+	end if;
+end; 
+
+
+--테이블 생성
+create table dept_history
+as
+select dno,dname,loc,sysdate regdate from department where 1<>1;
+select * from dept_history;
+
+
+select * from user_triggers;
+select object_name, status from user_objects 
+ where object_type='TRIGGER';
+
+select * from dept;
+select * from dept_history;
+
+--삭제트리거
+create or replace trigger trigger_del
+after delete--삭제직후 실행되는 트리거
+on dept_org --
+for each row--행단위 처리
+begin
+	dbms_output.put_line('deleting trigger 발생');
+	delete from dept_copy where dept_copy.dno=:old.dno;--삭제직후 이전값으로 조회하여 삭제
+	insert into dept_history
+	values(:old.dno,:old.dname,:old.loc,sysdate);--삭제직후 이전값으로 입력처리
+	--삭제전 :old.dno값 40, :new.dno값  null;
+	--삭제후 :old.dno값 40, :new.dno값  null;
+end;
+
+--dept_org테이블 생성
+create table dept_org as select *  from dept;
+create table dept_copy as select * from dept_org;
+--dept_copy 테이블 생성
+select * from dept_org;
+select * from dept_copy;
+select * from dept_history;
 
 
 
+--update 트리거
 
 
 
