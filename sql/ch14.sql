@@ -154,13 +154,79 @@ v_dan number :=2; --변수선언 및 값 초기화
 v_i number:=1;
 begin
 	loop
+	 DBMS_OUTPUT.ENABLE(32768);
 	dbms_output.put(v_dan || '*'||v_i||'='||(v_dan*v_i)||'  ');
 	v_i:=v_i+1;--증가식
 	if v_i>9 then
 	  exit;
 	end if;
 	end loop;
+	 DBMS_OUTPUT.ENABLE(32768);
 	dbms_output.put_line('');
 end; 
+
+-- for loop
+declare--선언부
+dan number:=2;--변수 선언 및 초기화, 변수 :=값;
+i number:=1;--변수 :=값;
+begin --실행부
+	for i in 1..9 loop-- for 변수 in 하한 .. 상한 loop
+		dbms_output.put(dan||'*'||i||'='||(dan*i)||' ');--한줄 출력put()
+	end loop;
+	dbms_output.put_line('');--put()함수의 내용출력하기위해 put_line()추가
+end; 
+
+-- 구구단 이중 loop
+declare
+dan number:=2;
+i number:=1;
+begin
+	for dan in reverse 2..9 loop-- for 변수 in 하한..상한 loop
+	  for i in 1..9 loop-- for 변수 in 하한..상한 loop
+	    dbms_output.put(dan||'*'||i||'='||(dan*i)||' ');
+	  end loop;  
+	  dbms_output.put_line('');
+	end loop;
+end; 
+
+
+--while 반복문
+-- while 조건 loop ~~~ end loop
+set serveroutput on
+declare--선언부
+dan number:=2;
+i number:=1;--초기값
+begin--실행부
+	while  i<=9  loop
+	    dbms_output.put(dan||'*'||i||'='||(dan*i)||' ');
+	    i:=i+1;--증가 식  변수:=증가값
+	end loop;
+	dbms_output.put_line('');
+end; 
+
+--이중 while문
+declare--선언부
+dan number:=2;
+i number:=1;--초기값
+begin--실행부
+   while dan<=9 loop
+	while  i<=9  loop
+	    dbms_output.put(dan||'*'||i||'='||(dan*i)||' ');
+	    i:=i+1;--증가 식  변수:=증가값
+	end loop;
+	dbms_output.put_line('');
+	    dan := dan+1;--증가식 변수:=증가값
+	    i:=1;--안쪽 반복문 변수 값 1로 초기화
+   end loop;	
+end; 
+
+
+
+
+
+
+
+
+
 
 
