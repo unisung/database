@@ -208,23 +208,129 @@ select * from dept_copy;
 select * from dept_history;
 
 
-
 --update 트리거
+create or replace trigger trig_update
+after update
+on dept
+for each row
+begin
+	dbms_output.put_line('update 트리거 발생');
+	insert into dept_up_history
+	values(:old.dno,:old.dname,:old.loc,
+	       :new.dno,:new.dname,:new.loc,sysdate);
+	-- update이전 :old.dno 40, :new.dno는 null;
+	-- udpate이후 :old.dno 40, :new.dno는 수정된 값;
+end;
+
+--history테이블 생성
+create table dept_up_history
+as
+select dno oldno,dname oldname, loc oldloc, 
+      dno newno,dname newname,loc newloc,sysdate updatedate 
+  from department where 1<>1;
+
+select * from dept_up_history;
+
+select * from dept;
 
 
 
+--프로시져
+create or replace procedure ps_commission_up
+is
+begin
+    update employee
+       set commission=salary*0.05
+     where salary >3000;
+	commit;
+end; 
+
+--프로시져 생성 상태 확인 status가 valid이면 정상
+select object_name,object_type,status 
+  from user_objects where object_name='PS_COMMISSION_UP';
+
+--프로시져 실행
+SQL> execute ps_commission_up;
+
+--
+select * from employee where salary >3000;
+
+--매개변수 있는 프로시져 --7788사원이 근무하는 부서의 총 급여액 출력
+create or replace procedure ps_dept_tot
+(
+  v_eno in employee.eno%type, --값을 받는 매개변수 타입 in모드
+  v_tot out number--값을 출력하는 매개변수 타입 out모드
+)
+is
+begin
+	 select sum(salary)
+	   into v_tot
+	   from employee
+	  where dno=(select dno 
+	               from employee 
+	              where eno=v_eno); 
+end; 
+
+--상태 확인
+select object_name, status 
+ from user_objects where object_name='PS_DEPT_TOT';
+--실행
+--변수 선언 
+--variable 변수명 타입;
+SQL> variable v_saltot number;
+-- 실행
+-- execute 프로시져명(in모드값, :out모드변수)
+SQL> execute ps_dept_tot(7788,:v_saltot);
+
+PL/SQL procedure successfully completed.
+-- print out모드변수;
+SQL> print v_saltot;
+
+  V_SALTOT
+----------
+  12589.19
+
+
+--함수 return문을 가진 객체
+create or replace function fn_jobname
+(v_eno number)--매개변수 
+return varchar2--return타입 
+is
+v_job employee.job%type;--출력용 변수 선언
+begin
+	 select job
+	   into v_job
+	   from employee
+	  where eno=7788;
+	return v_job;--결과 리턴문
+end; 
+--프로시져 상태 확인
+select object_name, object_type, status 
+ from user_objects where object_type='FUNCTION';
+--실행
+--변수 선언
+SQL> variable v_jobname varchar2(20);
+--실행후 결과
+SQL> execute :v_jobname :=fn_jobname(7788);
+
+PL/SQL procedure successfully completed.
+--결과 출력
+SQL> print v_jobname;
+
+V_JOBNAME
+----------------
+ANALYST  
+
+
+--트리거
 
 
 
+  
 
-
-
-
-
-
-
-
-
-
+  
+  
+  
+  
 
 
