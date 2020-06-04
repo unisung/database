@@ -323,10 +323,62 @@ ANALYST
 
 
 --트리거
+create table emp_history
+as
+select eno oldeno,ename oldename,job oldjob,dno olddno,
+       eno neweno,ename newename,job newjob,dno newdno,
+       sysdate chgdate
+  from employee
+ where 1<>1;
+ 
+select * from emp_history; 
 
+--트리거 생성
+create or replace trigger tr_empchg
+after update--타이밍 직후, 이벤트 update
+on employee --트리거가 작동되는 테이블 employee
+for each row -- 행단위 처리
+begin
+	 dbms_output.put_line('update trigger 실행');
+	 insert into emp_history 
+	 values(:old.eno,:old.ename,:old.job,:old.dno,-- 칼럼이전값 :old속성
+	        :new.eno,:new.ename,:new.job,:new.dno,-- 칼럼이후값 :new속성
+	        sysdate);
+end; 
 
+--트리거 활성화/비활성화 여부 확인
+select trigger_name, triggering_event,status 
+  from user_triggers
+ where trigger_name =UPPER('tr_empchg');
 
-  
+--트리거 상태 확인
+select object_name,object_type,status 
+  from user_objects 
+ where object_type='TRIGGER';
+ 
+ 
+select * from employee where eno=7788; -- job:MANAGER, dno:30
+--테이블의 데이타 수정
+ update employee
+    set job='MANAGER',
+        dno=30
+  where eno=7788;
+commit
+
+select * from employee where eno=7788;
+select * from emp_history;
+--SQL> set serveroutput on
+SQL> update employee
+  2     set ename='Scotttttt',
+  3         job='Analyst',
+  4         dno=20
+  5   where eno=7788;
+update trigger 실행
+
+1 row updated.
+
+SQL> commit;
+
 
   
   
