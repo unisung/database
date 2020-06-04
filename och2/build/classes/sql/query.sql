@@ -11,3 +11,19 @@ select dno,dname,loc from dept;
 select * from employee where eno=7788;
 
 select * from dept where dno=10;
+select * from dept where dno=20;
+select dname from dept where dno=10;
+select * from dept where dno=10;
+
+select * from dept where dno=?;--10,20,30
+select * from dept;
+
+select * from employee;
+insert into employee values(7999,'홍길동','CLERK',7788,sysdate,1500,null,20);
+select eno,ename,job,salary,dname
+  from employee a, department b 
+ where a.dno=b.dno
+   and hiredate > '87/05/05'
+   and a.dno=20
+   and a.job like 'CLERK';
+
