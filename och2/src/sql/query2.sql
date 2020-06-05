@@ -74,6 +74,38 @@ create or replace procedure sp_salary_ename2(
  	  from employee 
  	 where ename=v_ename;  
  end; 
+--실행
+SQL> variable v_sal number;
+SQL> execute sp_salary_ename2('SMITH',:v_sal);
+PL/SQL procedure successfully completed.
+SQL> print v_sal
+     V_SAL
+----------
+   1021.03
+   
+select * from user_objects where object_name='FN_HIRE_ENO'; 
+select text from user_source where name='FN_HIRE_ENO';
 
+create or replace function fn_hire_eno  
+ (v_eno number)  
+ return varchar2  
+ as  
+ v_date date;  
+ begin  
+ 	select hiredate  
+ 	  into v_date   
+ 	  from employee  
+ 	 where eno=v_eno;  
+    return to_char(v_date);	   
+end;   
+   
+--실행
+SQL> variable v_date varchar2(20);--
+SQL> exec :v_date :=fn_hire_eno(7788);
+PL/SQL procedure successfully completed.
+SQL> print v_date;
+V_DATE
+----------------------------------------
+87/07/13
 
 
