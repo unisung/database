@@ -109,3 +109,11 @@ V_DATE
 87/07/13
 
 
+select * from department where dno=60;
+
+
+
+
+
+
+
