@@ -54,10 +54,26 @@ SQL> print v_sal;
    1021.03 
  
 
+select * from employee;
 
+select * from user_objects 
+ where object_type='PROCEDURE'
+ order by object_name;
 
+select text from user_source where name='SP_SALARY_ENAME2';
 
-
+--매개변수모드가 in모드,out모드 같이 있는 경우
+create or replace procedure sp_salary_ename2(  
+ v_ename in employee.ename%type,  
+ v_salary out employee.salary%type  
+ )  
+ as  
+ begin  
+ 	select salary 
+ 	  into v_salary 
+ 	  from employee 
+ 	 where ename=v_ename;  
+ end; 
 
 
 
