@@ -1,0 +1,1 @@
+select dno, dname, loc from dept where dno=10;
