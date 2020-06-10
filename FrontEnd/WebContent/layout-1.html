@@ -1,0 +1,66 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+body{
+margin: 0;
+padding: 0;
+}
+#wrap{
+ width: 960px;
+ background: #ccc;
+ position: relative;/* position static ->relative */
+ left:50%;
+ margin-left: -480px;/* relative이므로 마진 이동가능  */
+}
+#header{
+ background: #eee;
+ padding: 20px;
+}
+#header .logo{
+ float: left;
+}
+#content{
+padding: 20px;
+}
+#footer{
+background: #000;
+height: 50px;
+text-align: center;
+padding: 20px;
+}
+#footer span{
+color: #fff;
+}
+.banner img{
+ width: 100%;/* 부모요소의 크기만큼 지정 */
+}
+
+</style>
+</head>
+<body>
+<div id="wrap">
+<div id="header">
+<span class="logo"><img src="img/logo.png" alt="사이트로고"></span>
+<h1>CSS활용강의</h1>
+<h2>레이아웃 1 -단일 레이아웃 만들기</h2> 
+</div><!--header끝.  -->
+<div id="content">
+<h3>레이아웃을 만들고 가운데 배치하기</h3>
+
+<div class="banner">
+  <img src="img/bg1.jpg" alt="배경화면1">
+</div>
+<p>모든 국민은 인간다운 생활을 할 권리를 가진다. 공공필요에 의한 재산권의 수용·사용 또는 제한 및 그에 대한 보상은 법률로써 하되, 정당한 보상을 지급하여야 한다. 대통령은 법률안의 일부에 대하여 또는 법률안을 수정하여 재의를 요구할 수 없다. 국정감사 및 조사에 관한 절차 기타 필요한 사항은 법률로 정한다. 탄핵소추의 의결을 받은 자는 탄핵심판이 있을 때까지 그 권한행사가 정지된다. 국가안전보장회의의 조직·직무범위 기타 필요한 사항은 법률로 정한다. 헌법재판소는 법률에 저촉되지 아니하는 범위안에서 심판에 관한 절차, 내부규율과 사무처리에 관한 규칙을 제정할 수 있다. 국회에 제출된 법률안 기타의 의안은 회기중에 의결되지 못한 이유로 폐기되지 아니한다. 다만, 국회의원의 임기가 만료된 때에는 그러하지 아니하다.</p>
+
+<p>국교는 인정되지 아니하며, 종교와 정치는 분리된다. 국토와 자원은 국가의 보호를 받으며, 국가는 그 균형있는 개발과 이용을 위하여 필요한 계획을 수립한다. 법관이 중대한 심신상의 장해로 직무를 수행할 수 없을 때에는 법률이 정하는 바에 의하여 퇴직하게 할 수 있다. 대법원과 각급법원의 조직은 법률로 정한다. 모든 국민은 법률이 정하는 바에 의하여 국방의 의무를 진다. 제1항의 해임건의는 국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다. 대통령은 법률에서 구체적으로 범위를 정하여 위임받은 사항과 법률을 집행하기 위하여 필요한 사항에 관하여 대통령령을 발할 수 있다.</p>
+
+</div><!--content끝.  -->
+<div id="footer">
+<span>2020.CSS활용강좌 All rights reserved.</span>
+</div><!--footer끝.  -->
+
+</div><!--wrap끝.  -->
+
+</body>
+</html>
