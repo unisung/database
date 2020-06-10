@@ -12,5 +12,14 @@ public class ButtonExample {
 		//매개변수의 다형성
 		btn.setOnClickListener(new MessageListener());
 		btn.touch();//구현체의 재정의된 메소드 실행
+		
+		//메소 매개변수로 사용
+	    btn.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick() {
+				System.out.println("인터페이스 객체의 메소드 실행");
+			}
+		});	
+	   btn.touch(); 
 	}
 }
