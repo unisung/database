@@ -1,0 +1,90 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+body{
+margin: 0;/* 위,오른쪽,아래,왼쪽 */
+}
+#wrap{
+width: 960px;
+background: #ccc;
+position: relative;
+left:50%;
+margin-left: -480px;
+}
+#header{
+background: #eee;
+padding: 20px;/* 위,오른쪽,아래,왼쪽 */
+}
+#header .logo{
+ float: left;
+}
+#content{
+position: relative;
+height: auto;
+}
+#content img{
+width: 100%;/* 부모요소의 폭만큼 늘이기 */
+}
+#footer{
+background: #000;
+height: 50px;
+text-align: center;/* span택 중앙 정렬 */
+padding:20px;
+}
+#footer span{
+color:#fff;
+}
+#mainContent{
+float: right;
+width: 700px;
+padding: 20px;
+}
+#subContent{
+float: left;
+width: 220px;
+height: 100%;/* 감싸고 있는 부모요소의 높이만큼 */
+position: absolute;/* 부모중에 relative인 요소가 기준 */
+background: #ee8;
+}
+.clear{
+clear: both;
+}
+a{
+  text-decoration: none;
+  color:#000;
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+<div id="header">
+<span class="logo"><img src="img/logo.png" alt="사이트 로고"></span>
+<h1>Css활용강의</h1>
+<h2>레이아웃2-이단 레이아웃 만들기</h2>
+</div>
+<div id="content">
+<div id="mainContent">
+<h3>레이아웃 만드는 방법</h3>
+<img src="img/bg1.jpg" alt="배경이미지">
+<p>국가는 농·어민과 중소기업의 자조조직을 육성하여야 하며, 그 자율적 활동과 발전을 보장한다. 모든 국민은 헌법과 법률이 정한 법관에 의하여 법률에 의한 재판을 받을 권리를 가진다. 국토와 자원은 국가의 보호를 받으며, 국가는 그 균형있는 개발과 이용을 위하여 필요한 계획을 수립한다. 국군은 국가의 안전보장과 국토방위의 신성한 의무를 수행함을 사명으로 하며, 그 정치적 중립성은 준수된다. 국교는 인정되지 아니하며, 종교와 정치는 분리된다. 위원은 탄핵 또는 금고 이상의 형의 선고에 의하지 아니하고는 파면되지 아니한다. 일반사면을 명하려면 국회의 동의를 얻어야 한다. 국민경제자문회의의 조직·직무범위 기타 필요한 사항은 법률로 정한다.</p>
+</div>
+<div id="subContent">
+<ul>
+<li><a href="#" title="홈 메뉴">홈</a></li>
+<li><a href="#" title="회사소개 메뉴">회사소개</a></li>
+<li><a href="#" title="뉴스 메뉴">뉴스</a></li>
+<li><a href="#" title="제품소개 메뉴">제품소개</a></li>
+<li><a href="#" title="고객센터 메뉴">고객센터</a></li>
+</ul>
+</div>
+<div class="clear"></div>
+</div><!--content끝.  -->
+
+<div id="footer">
+<span>2020.CSS활용 강좌 All rights reserved. </span>
+</div><!--footer끝.  -->
+
+</div>
+
+</body>
+</html>
