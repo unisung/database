@@ -2,13 +2,15 @@ package ch02;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
 public class ListExample1 {
 	public static void main(String[] args) {
 	 // List인터페이스 변수 = new ArrayList();
-	  List<String> strList = new ArrayList<String>();
+	  List<String> strList = Collections.synchronizedList(new ArrayList<String>());
+	  
 	  //요소 추가 add(요소)
 	  strList.add("배"); 
 	  strList.add("사과");

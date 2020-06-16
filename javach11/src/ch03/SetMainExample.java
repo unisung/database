@@ -1,12 +1,13 @@
 package ch03;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 
 public class SetMainExample {
 	public static void main(String[] args) {
-		Set<Integer> set1 = new HashSet<>();
+		Set<Integer> set1 = Collections.synchronizedSet(new HashSet<>());
 		set1.add(10);
 		set1.add(20);
 		set1.add(10);

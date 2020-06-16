@@ -1,13 +1,14 @@
 package ch02;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //index로 객체를 관리하는 객체 List인터페이스
 public class ListExample2 {
 	public static void main(String[] args) {
 	 List<String> list = new ArrayList<String>();
-	 
+	 list = Collections.synchronizedList(list);
 	 //추가
 	 list.add("홍길동");
 	 list.add("일지매");//중복저장

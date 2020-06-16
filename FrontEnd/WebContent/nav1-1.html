@@ -1,0 +1,154 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+body{
+margin: 0;
+}
+a{
+  text-decoration: none;
+  color:#000;
+}
+#wrap{
+width: 960px;
+background: #ccc;
+position: relative;
+left:50%;
+margin-left: -480px;
+}
+#header{
+background: #eee;
+padding: 20px;
+}
+#header .logo{
+float:left;
+}
+#content{
+position: relative;
+height: auto;
+}
+#content img{
+width: 100%;
+}
+#footer{
+background: #000;
+height: 50px;
+text-align: center;
+padding: 20px;
+}
+#footer span{
+color:#fff;
+}
+#mainContent{
+float: right;
+width: 700px;
+padding: 20px;
+}
+#subContent{
+float: left;
+width:220px;
+height: 100%;
+position: absolute;
+background: #666;
+}
+#subContent a{
+display: block;
+width: 100%;
+height: 100%;
+padding: 10px;
+}
+ul,li{
+list-style:none;
+padding: 0;
+margin: 0;
+}
+#subContent > ul > li{
+background: #6688cc;
+margin: 4px;
+overflow: hidden;
+padding-left:20px;
+}
+
+#subContent > ul> li > a{
+ display: block;/* 폭,높이 */
+ width: 100%;
+ height: 100%;
+ padding: 10px;
+ 
+ padding-left: 30px;
+ background: url("img/bullet.png") no-repeat;
+ background-position: 10px 14px;
+}
+#subContent > ul > li >ul > li{
+ padding:4px;
+ margin: 2px;
+ margin-left: 20px;
+}
+#subContent > ul >li >ul >li > a {
+display: block;
+width: 100%;
+height: 100%;
+padding: 10px;
+padding-left: 30px;
+}
+#subContent > ul > li >ul > li:hover{
+/* background: #ee99aa;*/
+background: #fff;
+}
+#subContent > ul > .active, #subContent > ul > li:hover{
+background: #99eedd;
+}
+/*2단메뉴 감추기  */
+#subContent > ul > li > ul{
+display: none;/* 서브메뉴 숨김 */
+}
+/* 2단메뉴가 있는 1단메뉴리스트에 마우스을 올렸을 때 2단을 블럭요소로 보이게 처리  */
+#subContent > ul > li:hover> ul, #subContent> ul > .active >ul {
+display: block;
+}
+
+.clear{clear:both;}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="header">
+  <span class="logo"><img src="img/logo.png" alt="사이트로고"></span>
+  <h1>CSS활용강좌</h1>
+  <h2>세로 네비게이션 만들기</h2>
+  <div class="clear"></div>
+  </div><!-- header끝. -->
+  <div id="content">
+   <div id="mainContent">
+     <h3>레이아웃 만들기</h3>
+     <img src="img/bg1.jpg" alt="배경이미지">
+     <p>국회는 선전포고, 국군의 외국에의 파견 또는 외국군대의 대한민국 영역안에서의 주류에 대한 동의권을 가진다. 모든 국민은 근로의 권리를 가진다. 국가는 사회적·경제적 방법으로 근로자의 고용의 증진과 적정임금의 보장에 노력하여야 하며, 법률이 정하는 바에 의하여 최저임금제를 시행하여야 한다. 국회는 의원의 자격을 심사하며, 의원을 징계할 수 있다. 헌법재판소에서 법률의 위헌결정, 탄핵의 결정, 정당해산의 결정 또는 헌법소원에 관한 인용결정을 할 때에는 재판관 6인 이상의 찬성이 있어야 한다. 국가는 농지에 관하여 경자유전의 원칙이 달성될 수 있도록 노력하여야 하며, 농지의 소작제도는 금지된다.</p>
+   </div>
+   <div id="subContent">
+   <ul>
+    <li><a href="#" title="홈메뉴">홈</a></li>
+    <li><a href="#" title="회사소개메뉴">회사소개</a></li>
+    <li class="active"><a href="#" title="뉴스메뉴">뉴스</a>
+        <ul>
+          <li><a href="#" title="뉴스1 메뉴">뉴스1</a></li>
+          <li><a href="#" title="뉴스2 메뉴">뉴스2</a></li>
+          <li><a href="#" title="뉴스3 메뉴">뉴스3</a></li>
+        </ul>
+    </li>
+    <li><a href="#" title="제품소개 메뉴">제품소개</a>
+     	<ul>
+     		<li><a href="#" title="제품1메뉴">제품1</a></li>
+     	    <li><a href="#" title="제품2메뉴">제품2</a></li>
+     	    <li><a href="#" title="제품3메뉴">제품3</a></li>
+     	</ul>
+    </li>
+    <li><a href="#" title="고객센터 메뉴">고객센터</a></li>
+   </ul>
+   </div>
+  <div class="clear"></div><!-- float속성 제거  -->
+  </div><!--content끝.  -->
+  <div id="footer">
+  <span>2020.CSS활용강좌 All rights reserverd.</span>
+  </div><!-- footer끝. -->
+</div>
+</body>
+</html>
