@@ -1,12 +1,14 @@
 package ch04;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MapExample7 {
 	public static void main(String[] args) {
 	try(Scanner scanner = new Scanner(System.in);) {
-		HashMap<String, Student> map=new HashMap<>();
+		Map<String, Student> map=Collections.synchronizedMap(new HashMap<>());
 		//3명의 학생 저장
 		map.put("홍길동", new Student(1, "010-111-1234"));
 		map.put("일지매", new Student(2, "010-111-3333"));

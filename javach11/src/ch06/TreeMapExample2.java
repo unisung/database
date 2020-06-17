@@ -1,5 +1,6 @@
 package ch06;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Set;
@@ -14,13 +15,12 @@ public class TreeMapExample2 {
 		scores.put(95, "신용권");
 		scores.put(80, "김길동");
 		
-NavigableMap<Integer, String> descMap = scores.descendingMap();
+NavigableMap<Integer, String> descMap = Collections.synchronizedNavigableMap(scores.descendingMap());
 Set<Map.Entry<Integer, String>> descEntrySet = descMap.entrySet();
 for(Map.Entry<Integer, String> s:descEntrySet) {
 	System.out.println(s.getKey()+"="+s.getValue());
 }
 		
-
 	}
 
 }

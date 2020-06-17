@@ -1,12 +1,13 @@
 package ch02;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ListExample5 {
 	public static void main(String[] args) {
 		//Student 객체 "홍길동", "임꺽정", "일지매"를 저장 후 출력하는 list
-      List<Student> list = new ArrayList<Student>();
+      List<Student> list = Collections.synchronizedList(new ArrayList<Student>());
       list.add(new Student("홍길동"));
       list.add(new Student("임꺽정"));
       list.add(new Student("일지매"));

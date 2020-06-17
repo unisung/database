@@ -1,12 +1,14 @@
 package ch03;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 public class SetMainExample2 {
 	public static void main(String[] args) {
-	 Set<Integer> set1 = new HashSet<>();
+	 Set<Integer> set1 
+	       = Collections.synchronizedSet(new HashSet<>());
 	 set1.add(10); set1.add(20); set1.add(30);
 	 //iterator() 반복자 얻기
 	 Iterator<Integer> itor = set1.iterator();
