@@ -7,6 +7,7 @@ import java.io.*;
 public class PerClient extends Thread {
 	static List<PrintWriter> list = 
 		Collections.synchronizedList(new ArrayList<>());
+	
 	Socket socket;  PrintWriter pw; String name;
 	public PerClient(Socket socket) throws IOException {
 		this.socket = socket;
@@ -24,7 +25,7 @@ public class PerClient extends Thread {
 			}
 		} catch (IOException e) {System.out.println(e.getMessage());
 		} finally {	list.remove(pw);
-			sendAll("# "+name+"님이 나가셨습니다. 에이 재수");
+			sendAll("# "+name+"님이 나가셨습니다.");
 			try { socket.close(); } catch (IOException e) {}
 		}
 	}

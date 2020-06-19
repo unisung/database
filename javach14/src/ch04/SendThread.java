@@ -11,7 +11,7 @@ public class SendThread extends Thread {
 				new PrintWriter(socket.getOutputStream());
 			pw.println(name);	pw.flush();
 			BufferedReader br = new BufferedReader(
-				new InputStreamReader(System.in));
+				new InputStreamReader(System.in,"utf-8"));
 			while(true) {
 				String msg = br.readLine();
 				if (msg.equals("bye")) break;
